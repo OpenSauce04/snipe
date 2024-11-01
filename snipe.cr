@@ -1,9 +1,15 @@
 MAX_FILES = 20
+CLEAR_SCREEN = "\e[H\e[2J"
 
 files = Dir["**/*"]
 
+print CLEAR_SCREEN
+
 loop do
+	puts Dir.current
+	print ">"
 	search = gets || ""
+	print CLEAR_SCREEN
 	next if search.empty?
 
 	matched_files = files.select(/#{Regex.escape(search)}[^\/]*$/)
