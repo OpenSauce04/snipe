@@ -1,0 +1,8 @@
+name: snipe
+version: 0.0.1
+
+dependencies:
+  ncurses:
+    github: SamualLB/ncurses
+
+license: GPLv3
