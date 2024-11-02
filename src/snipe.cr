@@ -33,10 +33,10 @@ loop do
 	input = NCurses.get_char
 
 	case input
-	when ENTER
-		system "nano #{matched_files.first}"
+	when KEY_ENTER
+		system "nano #{matched_files[selection]}"
 		next
-	when BACKSPACE
+	when KEY_BACKSPACE
 		search = search[0...-1] # Remove last character
 	else
 		next if !input.to_s.match(/[[:print:]]/)
