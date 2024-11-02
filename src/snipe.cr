@@ -9,6 +9,7 @@ selection = 0
 
 NCurses.start
 NCurses.cbreak
+NCurses.no_echo
 NCurses.set_cursor NCurses::Cursor::Invisible
 
 loop do
