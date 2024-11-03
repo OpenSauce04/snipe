@@ -18,11 +18,13 @@ loop do
 	NCurses.print "---------------------------\n"
 	NCurses.print Dir.current + "/\n"
 
+	max_files = NCurses.max_y - 7
+
 	selection = [0, selection].max
-	selection = [selection, MAX_FILES-1].min
+	selection = [selection, max_files-1].min
 	selection = [selection, matched_files.size-1].min
 
-	matched_files.first(MAX_FILES).each_with_index do |item, index|
+	matched_files.first(max_files).each_with_index do |item, index|
 		selection_char = " "
 		if index == selection
 			selection_char = "*"
@@ -30,8 +32,8 @@ loop do
 		NCurses.print " #{selection_char} #{item}\n"
 	end
 
-	if matched_files.size > MAX_FILES
-		NCurses.print "   + #{matched_files.size - MAX_FILES} more\n"
+	if matched_files.size > max_files
+		NCurses.print "   + #{matched_files.size - max_files} more\n"
 	end
 
 	input = NCurses.get_char
