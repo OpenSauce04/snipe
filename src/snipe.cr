@@ -7,10 +7,14 @@ matched_files = [] of String
 search = ""
 selection = 0
 
-NCurses.start
-NCurses.cbreak
-NCurses.no_echo
-NCurses.set_cursor NCurses::Cursor::Invisible
+def init_ncurses
+	NCurses.start
+	NCurses.cbreak
+	NCurses.no_echo
+	NCurses.set_cursor NCurses::Cursor::Invisible
+end
+
+init_ncurses
 
 loop do
 	NCurses.clear
@@ -46,7 +50,9 @@ loop do
 		selection += 1
 		next
 	when KEY_ENTER
+		NCurses.end
 		system "#{ENV["EDITOR"]} #{matched_files[selection]}"
+		init_ncurses
 		next
 	when KEY_BACKSPACE
 		search = search[0...-1] # Remove last character
