@@ -44,7 +44,7 @@ loop do
 		selection += 1
 		next
 	when KEY_ENTER
-		system "nano #{matched_files[selection]}"
+		system "#{ENV["EDITOR"]} #{matched_files[selection]}"
 		next
 	when KEY_BACKSPACE
 		search = search[0...-1] # Remove last character
