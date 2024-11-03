@@ -18,6 +18,10 @@ loop do
 	NCurses.print "---------------------------\n"
 	NCurses.print Dir.current + "/\n"
 
+	selection = [0, selection].max
+	selection = [selection, MAX_FILES-1].min
+	selection = [selection, matched_files.size-1].min
+
 	matched_files.first(MAX_FILES).each_with_index do |item, index|
 		selection_char = " "
 		if index == selection
@@ -33,6 +37,12 @@ loop do
 	input = NCurses.get_char
 
 	case input
+	when ']' # TODO: Make navigation keyboard-layout-agnostic
+		selection -= 1
+		next
+	when '#'
+		selection += 1
+		next
 	when KEY_ENTER
 		system "nano #{matched_files[selection]}"
 		next
