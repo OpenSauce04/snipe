@@ -56,6 +56,8 @@ loop do
 		next
 	when KEY_BACKSPACE
 		search = search[0...-1] # Remove last character
+	when '='
+		search = ""
 	else
 		next if !input.to_s.match(/[[:print:]]/)
 		search += input.to_s
