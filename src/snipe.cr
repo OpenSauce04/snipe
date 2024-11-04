@@ -18,8 +18,7 @@ init_ncurses
 
 loop do
 	NCurses.clear
-	NCurses.print ">#{search}|\n"
-	NCurses.print "---------------------------\n"
+	NCurses.print ">#{search}|\n\n"
 	NCurses.print Dir.current + "/\n"
 
 	max_files = NCurses.max_y - 7
