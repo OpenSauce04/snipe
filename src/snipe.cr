@@ -15,12 +15,20 @@ def init_ncurses
 end
 
 init_ncurses
+NCurses.start_color
+NCurses.use_default_colors
+NCurses.init_color_pair(1, 247, NCurses::Color::Default)
+NCurses.init_color_pair(2, 244, NCurses::Color::Default)
+NCurses.init_color_pair(3, 14, NCurses::Color::Default)
+
 
 loop do
 	# Draw interface
 	NCurses.clear
+	NCurses.set_color
 	NCurses.print "\n"
 	NCurses.print ">#{search}|\n\n"
+	NCurses.set_color 1
 	NCurses.print Dir.current + "/\n"
 
 	max_files = NCurses.max_y - 7
@@ -34,10 +42,16 @@ loop do
 		if index == selection
 			selection_char = "*"
 		end
-		NCurses.print " #{selection_char} #{item}\n"
+		NCurses.set_color 3
+		NCurses.print " #{selection_char} "
+		NCurses.set_color 2
+		NCurses.print "#{item.rpartition('/').first}/"
+		NCurses.set_color
+		NCurses.print "#{item.rpartition('/').last}\n"
 	end
 
 	if matched_files.size > max_files
+		NCurses.set_color 3
 		NCurses.print "   + #{matched_files.size - max_files} more\n"
 	end
 
