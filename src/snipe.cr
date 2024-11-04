@@ -18,6 +18,7 @@ init_ncurses
 
 loop do
 	NCurses.clear
+	NCurses.print "\n"
 	NCurses.print ">#{search}|\n\n"
 	NCurses.print Dir.current + "/\n"
 
