@@ -3,8 +3,8 @@ require "ncurses"
 require "./consts.cr"
 
 files = Dir["**/*"].select { |f| File.file?(f) }
-matched_files = [] of String
 search = ""
+matched_files = files.select(/#{Regex.escape(search)}/)
 selection = 0
 
 def init_ncurses
