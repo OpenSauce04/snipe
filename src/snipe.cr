@@ -2,7 +2,7 @@ require "ncurses"
 
 require "./consts.cr"
 
-files = Dir["**/*"]
+files = Dir["**/*"].select { |f| File.file?(f) }
 matched_files = [] of String
 search = ""
 selection = 0
