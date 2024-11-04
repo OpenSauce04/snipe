@@ -17,6 +17,7 @@ end
 init_ncurses
 
 loop do
+	# Draw interface
 	NCurses.clear
 	NCurses.print "\n"
 	NCurses.print ">#{search}|\n\n"
@@ -40,8 +41,10 @@ loop do
 		NCurses.print "   + #{matched_files.size - max_files} more\n"
 	end
 
+	# Get input
 	input = NCurses.get_char
 
+	# Process input
 	case input
 	when ']' # TODO: Make navigation keyboard-layout-agnostic
 		selection -= 1
@@ -63,6 +66,7 @@ loop do
 		search += input.to_s
 	end
 
+	# Update search results
 	matched_files = files.select(/#{Regex.escape(search)}[^\/]*$/)
 	selection = 0
 end
