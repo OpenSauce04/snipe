@@ -7,14 +7,10 @@ search = ""
 matched_files = files.select(/#{Regex.escape(search)}/)
 selection = 0
 
-def init_ncurses
-	NCurses.start
-	NCurses.cbreak
-	NCurses.no_echo
-	NCurses.set_cursor NCurses::Cursor::Invisible
-end
-
-init_ncurses
+NCurses.start
+NCurses.cbreak
+NCurses.no_echo
+NCurses.set_cursor NCurses::Cursor::Invisible
 NCurses.start_color
 NCurses.use_default_colors
 NCurses.init_color_pair(1, 247, NCurses::Color::Default)
@@ -69,7 +65,7 @@ loop do
 	when KEY_ENTER
 		NCurses.end
 		system "#{ENV["EDITOR"]} #{matched_files[selection]}"
-		init_ncurses
+		NCurses.start
 		next
 	when KEY_BACKSPACE
 		search = search[0...-1] # Remove last character
