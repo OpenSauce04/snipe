@@ -13,18 +13,19 @@ NCurses.no_echo
 NCurses.set_cursor NCurses::Cursor::Invisible
 NCurses.start_color
 NCurses.use_default_colors
-NCurses.init_color_pair(1, 247, NCurses::Color::Default)
-NCurses.init_color_pair(2, 244, NCurses::Color::Default)
+# TODO: These should probably be customizable
+NCurses.init_color_pair(1, 15, NCurses::Color::Default)
+NCurses.init_color_pair(2, 8, NCurses::Color::Default)
 NCurses.init_color_pair(3, 14, NCurses::Color::Default)
-
+NCurses.init_color_pair(4, 13, NCurses::Color::Default)
 
 loop do
 	# Draw interface
 	NCurses.clear
-	NCurses.set_color
+	NCurses.set_color 1
 	NCurses.print "\n"
 	NCurses.print ">#{search}|\n\n"
-	NCurses.set_color 1
+	NCurses.set_color 2
 	NCurses.print Dir.current + "/\n"
 
 	max_files = NCurses.max_y - 7
@@ -38,16 +39,16 @@ loop do
 		if index == selection
 			selection_char = "*"
 		end
-		NCurses.set_color 3
+		NCurses.set_color 4
 		NCurses.print " #{selection_char} "
-		NCurses.set_color 2
+		NCurses.set_color 3
 		NCurses.print "#{item.rpartition('/').first}/"
-		NCurses.set_color
+		NCurses.set_color 1
 		NCurses.print "#{item.rpartition('/').last}\n"
 	end
 
 	if matched_files.size > max_files
-		NCurses.set_color 3
+		NCurses.set_color 4
 		NCurses.print "   + #{matched_files.size - max_files} more\n"
 	end
 
