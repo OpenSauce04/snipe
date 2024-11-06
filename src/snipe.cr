@@ -1,6 +1,7 @@
 require "ncurses"
 
 require "./consts.cr"
+require "./colors.cr"
 require "./interface.cr"
 
 files = Dir["**/*"].select { |f| File.file?(f) }
@@ -14,21 +15,15 @@ NCurses.no_echo
 NCurses.set_cursor NCurses::Cursor::Invisible
 NCurses.start_color
 NCurses.use_default_colors
-# TODO: These should probably be customizable
-NCurses.init_color_pair(1, 15, NCurses::Color::Default)
-NCurses.init_color_pair(2, 8, NCurses::Color::Default)
-NCurses.init_color_pair(3, 14, NCurses::Color::Default)
-NCurses.init_color_pair(4, 13, NCurses::Color::Default)
-NCurses.init_color_pair(5, 11, NCurses::Color::Default)
-
+init_color_pairs
 
 loop do
 	# Draw interface
 	NCurses.clear
-	NCurses.set_color 1
+	NCurses.set_color ColorPair::REGULAR
 	NCurses.print "\n"
 	NCurses.print ">#{search}|\n\n"
-	NCurses.set_color 2
+	NCurses.set_color ColorPair::DARK
 	NCurses.print Dir.current + "/\n"
 
 	max_files = NCurses.max_y - 7
@@ -40,7 +35,7 @@ loop do
 	render_file_list(max_files, matched_files, selection)
 
 	# Move cursor to consistent position at bottom of terminal
-	NCurses.set_color 5
+	NCurses.set_color ColorPair::INFO
 	NCurses.print "\n" * [0, max_files+1 - matched_files.size].max
 
 	render_legend

@@ -4,52 +4,52 @@ def render_file_list(max_files, matched_files, selection)
 		if index == selection
 			selection_char = "*"
 		end
-		NCurses.set_color 4
+		NCurses.set_color ColorPair::ACCENT2
 		NCurses.print " #{selection_char} "
-		NCurses.set_color 3
+		NCurses.set_color ColorPair::ACCENT1
 		NCurses.print "#{item.rpartition('/').first}/"
-		NCurses.set_color 1
+		NCurses.set_color ColorPair::REGULAR
 		NCurses.print "#{item.rpartition('/').last}\n"
 	end
 
 	if matched_files.size > max_files
-		NCurses.set_color 1
+		NCurses.set_color ColorPair::REGULAR
 		NCurses.print "   + #{matched_files.size - max_files} more\n"
 	end
 end
 
 def render_legend
 	NCurses.print "\n#{" "*7}DOWN "
-	NCurses.set_color 2
+	NCurses.set_color ColorPair::DARK
 	NCurses.print "{"
-	NCurses.set_color 1
+	NCurses.set_color ColorPair::REGULAR
 	NCurses.print "'"
-	NCurses.set_color 2
+	NCurses.set_color ColorPair::DARK
 	NCurses.print "/"
-	NCurses.set_color 1
+	NCurses.set_color ColorPair::REGULAR
 	NCurses.print "#"
-	NCurses.set_color 2
+	NCurses.set_color ColorPair::DARK
 	NCurses.print "}"
 
-	NCurses.set_color 5
+	NCurses.set_color ColorPair::INFO
 	NCurses.print "#{" "*5}UP "
-	NCurses.set_color 2
+	NCurses.set_color ColorPair::DARK
 	NCurses.print "{"
-	NCurses.set_color 1
+	NCurses.set_color ColorPair::REGULAR
 	NCurses.print "["
-	NCurses.set_color 2
+	NCurses.set_color ColorPair::DARK
 	NCurses.print "/"
-	NCurses.set_color 1
+	NCurses.set_color ColorPair::REGULAR
 	NCurses.print "]"
-	NCurses.set_color 2
+	NCurses.set_color ColorPair::DARK
 	NCurses.print "}"
 
-	NCurses.set_color 5
+	NCurses.set_color ColorPair::INFO
 	NCurses.print "#{" "*5}CLEAR "
-	NCurses.set_color 2
+	NCurses.set_color ColorPair::DARK
 	NCurses.print "{"
-	NCurses.set_color 1
+	NCurses.set_color ColorPair::REGULAR
 	NCurses.print "="
-	NCurses.set_color 2
+	NCurses.set_color ColorPair::DARK
 	NCurses.print "}"
 end
