@@ -18,6 +18,8 @@ NCurses.init_color_pair(1, 15, NCurses::Color::Default)
 NCurses.init_color_pair(2, 8, NCurses::Color::Default)
 NCurses.init_color_pair(3, 14, NCurses::Color::Default)
 NCurses.init_color_pair(4, 13, NCurses::Color::Default)
+NCurses.init_color_pair(5, 11, NCurses::Color::Default)
+
 
 loop do
 	# Draw interface
@@ -48,9 +50,48 @@ loop do
 	end
 
 	if matched_files.size > max_files
-		NCurses.set_color 4
+		NCurses.set_color 1
 		NCurses.print "   + #{matched_files.size - max_files} more\n"
 	end
+
+	# Move cursor to consistent position at bottom of terminal
+	NCurses.set_color 5
+	NCurses.print "\n" * [0, max_files+1 - matched_files.size].max
+
+	# Draw legend
+	NCurses.print "\n#{" "*7}DOWN "
+	NCurses.set_color 2
+	NCurses.print "{"
+	NCurses.set_color 1
+	NCurses.print "'"
+	NCurses.set_color 2
+	NCurses.print "/"
+	NCurses.set_color 1
+	NCurses.print "#"
+	NCurses.set_color 2
+	NCurses.print "}"
+
+	NCurses.set_color 5
+	NCurses.print "#{" "*5}UP "
+	NCurses.set_color 2
+	NCurses.print "{"
+	NCurses.set_color 1
+	NCurses.print "["
+	NCurses.set_color 2
+	NCurses.print "/"
+	NCurses.set_color 1
+	NCurses.print "]"
+	NCurses.set_color 2
+	NCurses.print "}"
+
+	NCurses.set_color 5
+	NCurses.print "#{" "*5}CLEAR "
+	NCurses.set_color 2
+	NCurses.print "{"
+	NCurses.set_color 1
+	NCurses.print "="
+	NCurses.set_color 2
+	NCurses.print "}"
 
 	# Get input
 	input = NCurses.get_char
