@@ -1,6 +1,7 @@
 require "ncurses"
 
 require "./consts.cr"
+require "./interface.cr"
 
 files = Dir["**/*"].select { |f| File.file?(f) }
 search = ""
@@ -36,62 +37,13 @@ loop do
 	selection = [selection, max_files-1].min
 	selection = [selection, matched_files.size-1].min
 
-	matched_files.first(max_files).each_with_index do |item, index|
-		selection_char = " "
-		if index == selection
-			selection_char = "*"
-		end
-		NCurses.set_color 4
-		NCurses.print " #{selection_char} "
-		NCurses.set_color 3
-		NCurses.print "#{item.rpartition('/').first}/"
-		NCurses.set_color 1
-		NCurses.print "#{item.rpartition('/').last}\n"
-	end
-
-	if matched_files.size > max_files
-		NCurses.set_color 1
-		NCurses.print "   + #{matched_files.size - max_files} more\n"
-	end
+	render_file_list(max_files, matched_files, selection)
 
 	# Move cursor to consistent position at bottom of terminal
 	NCurses.set_color 5
 	NCurses.print "\n" * [0, max_files+1 - matched_files.size].max
 
-	# Draw legend
-	NCurses.print "\n#{" "*7}DOWN "
-	NCurses.set_color 2
-	NCurses.print "{"
-	NCurses.set_color 1
-	NCurses.print "'"
-	NCurses.set_color 2
-	NCurses.print "/"
-	NCurses.set_color 1
-	NCurses.print "#"
-	NCurses.set_color 2
-	NCurses.print "}"
-
-	NCurses.set_color 5
-	NCurses.print "#{" "*5}UP "
-	NCurses.set_color 2
-	NCurses.print "{"
-	NCurses.set_color 1
-	NCurses.print "["
-	NCurses.set_color 2
-	NCurses.print "/"
-	NCurses.set_color 1
-	NCurses.print "]"
-	NCurses.set_color 2
-	NCurses.print "}"
-
-	NCurses.set_color 5
-	NCurses.print "#{" "*5}CLEAR "
-	NCurses.set_color 2
-	NCurses.print "{"
-	NCurses.set_color 1
-	NCurses.print "="
-	NCurses.set_color 2
-	NCurses.print "}"
+	render_legend
 
 	# Get input
 	input = NCurses.get_char
