@@ -1,11 +1,11 @@
 def render_file_list(max_files, matched_files, selection)
 	matched_files.first(max_files).each_with_index do |item, index|
-		selection_char = " "
+		selection_indicator = "  "
 		if index == selection
-			selection_char = "*"
+			selection_indicator = "~>"
 		end
 		NCurses.set_color ColorPair::ACCENT2
-		NCurses.print " #{selection_char} "
+		NCurses.print " #{selection_indicator}"
 		NCurses.set_color ColorPair::ACCENT1
 		NCurses.print "#{item.rpartition('/').first}/"
 		NCurses.set_color ColorPair::REGULAR
