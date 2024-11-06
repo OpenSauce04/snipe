@@ -57,10 +57,10 @@ loop do
 
 	# Process input
 	case input
-	when ']' # TODO: Make navigation keyboard-layout-agnostic
+	when '[', ']'
 		selection -= 1
 		next
-	when '#'
+	when '\'', '#'
 		selection += 1
 		next
 	when KEY_ENTER
