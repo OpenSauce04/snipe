@@ -29,10 +29,8 @@ loop do
 	end
 
 	NCurses.set_color ColorPair::ACCENTDARK
-	NCurses.with_attribute(NCurses::Attribute::Underline) do
-		NCurses.with_attribute(NCurses::Attribute::Dim) do
-			NCurses.print Dir.current + "/\n"
-		end
+	NCurses.with_attribute(NCurses::Attribute::Bold) do
+		NCurses.print Dir.current + "/\n"
 	end
 
 	max_files = NCurses.max_y - 7

@@ -7,7 +7,7 @@ end
 
 def init_color_pairs
 	NCurses.init_color_pair(ColorPair::REGULAR, NCurses::Color::Default, NCurses::Color::Default)
-	NCurses.init_color_pair(ColorPair::ACCENT, 14, NCurses::Color::Default)
-	NCurses.init_color_pair(ColorPair::ACCENTDARK, 6, NCurses::Color::Default)
-	NCurses.init_color_pair(ColorPair::INFO, 11, NCurses::Color::Default)
+	NCurses.init_color_pair(ColorPair::ACCENT, NCurses::Color::Cyan, NCurses::Color::Default)
+	NCurses.init_color_pair(ColorPair::ACCENTDARK, NCurses::Color::Blue, NCurses::Color::Default)
+	NCurses.init_color_pair(ColorPair::INFO, NCurses::Color::Yellow, NCurses::Color::Default)
 end
