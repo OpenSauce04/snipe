@@ -1,6 +1,10 @@
 name: snipe
 version: 0.0.1
 
+targets:
+  snipe:
+    main: src/snipe.cr
+
 dependencies:
   ncurses:
     github: SamualLB/ncurses
