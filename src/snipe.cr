@@ -37,7 +37,7 @@ loop do
 
 	# Move cursor to consistent position at bottom of terminal
 	NCurses.set_color ColorPair::INFO
-	NCurses.print "\n" * [0, max_files+1 - matched_files.size].max
+	NCurses.print "\n" * ([0, max_files+1 - matched_files.size].max + 1)
 
 	render_legend
 
