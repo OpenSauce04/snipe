@@ -64,7 +64,7 @@ loop do
 		system "#{ENV["EDITOR"]} #{matched_files[selection]}"
 		NCurses.start
 		next
-	when NCurses::Key::Backspace
+	when NCurses::Key::Backspace, KEY_BS # Some terminals output a BS control character when the backspace is pressed
 		search = search[0...-1] # Remove last character
 	when '='
 		search = ""
