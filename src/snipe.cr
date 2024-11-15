@@ -11,6 +11,7 @@ selection = 0
 
 NCurses.start
 NCurses.cbreak
+NCurses.keypad true
 NCurses.no_echo
 NCurses.set_cursor NCurses::Cursor::Invisible
 NCurses.start_color
@@ -45,18 +46,18 @@ loop do
 
 	# Process input
 	case input
-	when '[', ']'
+	when NCurses::Key::Up
 		selection -= 1
 		next
-	when '\'', '#'
+	when NCurses::Key::Down
 		selection += 1
 		next
-	when KEY_ENTER
+	when 10 # TODO: Represents the Enter key; See https://github.com/SamualLB/ncurses/issues/24
 		NCurses.end
 		system "#{ENV["EDITOR"]} #{matched_files[selection]}"
 		NCurses.start
 		next
-	when KEY_BACKSPACE
+	when NCurses::Key::Backspace
 		search = search[0...-1] # Remove last character
 	when '='
 		search = ""

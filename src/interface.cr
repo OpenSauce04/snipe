@@ -19,31 +19,6 @@ def render_file_list(max_files, matched_files, selection)
 end
 
 def render_legend
-	NCurses.print "\n#{" "*7}DOWN "
-	NCurses.set_color ColorPair::DARK
-	NCurses.print "{"
-	NCurses.set_color ColorPair::REGULAR
-	NCurses.print "'"
-	NCurses.set_color ColorPair::DARK
-	NCurses.print "/"
-	NCurses.set_color ColorPair::REGULAR
-	NCurses.print "#"
-	NCurses.set_color ColorPair::DARK
-	NCurses.print "}"
-
-	NCurses.set_color ColorPair::INFO
-	NCurses.print "#{" "*5}UP "
-	NCurses.set_color ColorPair::DARK
-	NCurses.print "{"
-	NCurses.set_color ColorPair::REGULAR
-	NCurses.print "["
-	NCurses.set_color ColorPair::DARK
-	NCurses.print "/"
-	NCurses.set_color ColorPair::REGULAR
-	NCurses.print "]"
-	NCurses.set_color ColorPair::DARK
-	NCurses.print "}"
-
 	NCurses.set_color ColorPair::INFO
 	NCurses.print "#{" "*5}CLEAR "
 	NCurses.set_color ColorPair::DARK
