@@ -1,15 +1,13 @@
 module ColorPair
 	REGULAR = 1
-	DARK = 2
-	ACCENT1 = 3
-	ACCENT2 = 4
-	INFO = 5
+	ACCENT = 2
+	ACCENTDARK = 3
+	INFO = 4
 end
 
 def init_color_pairs
-	NCurses.init_color_pair(ColorPair::REGULAR, 15, NCurses::Color::Default)
-	NCurses.init_color_pair(ColorPair::DARK, 8, NCurses::Color::Default)
-	NCurses.init_color_pair(ColorPair::ACCENT1, 14, NCurses::Color::Default)
-	NCurses.init_color_pair(ColorPair::ACCENT2, 13, NCurses::Color::Default)
+	NCurses.init_color_pair(ColorPair::REGULAR, NCurses::Color::Default, NCurses::Color::Default)
+	NCurses.init_color_pair(ColorPair::ACCENT, 14, NCurses::Color::Default)
+	NCurses.init_color_pair(ColorPair::ACCENTDARK, 6, NCurses::Color::Default)
 	NCurses.init_color_pair(ColorPair::INFO, 11, NCurses::Color::Default)
 end

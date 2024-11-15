@@ -1,15 +1,17 @@
 def render_file_list(max_files, matched_files, selection)
 	matched_files.first(max_files).each_with_index do |item, index|
-		selection_indicator = "  "
-		if index == selection
-			selection_indicator = "~>"
+		style = if index == selection
+		          NCurses::Attribute::Reverse
+		        else
+		          NCurses::Attribute::Normal
+		        end
+		NCurses.print "  "
+		NCurses.with_attribute(style) do
+			NCurses.set_color ColorPair::ACCENT
+			NCurses.print "#{item.rpartition('/').first}/"
+			NCurses.set_color ColorPair::REGULAR
+			NCurses.print "#{item.rpartition('/').last}\n"
 		end
-		NCurses.set_color ColorPair::ACCENT2
-		NCurses.print " #{selection_indicator}"
-		NCurses.set_color ColorPair::ACCENT1
-		NCurses.print "#{item.rpartition('/').first}/"
-		NCurses.set_color ColorPair::REGULAR
-		NCurses.print "#{item.rpartition('/').last}\n"
 	end
 
 	if matched_files.size > max_files
@@ -19,12 +21,15 @@ def render_file_list(max_files, matched_files, selection)
 end
 
 def render_legend
-	NCurses.set_color ColorPair::INFO
-	NCurses.print "#{" "*5}CLEAR "
-	NCurses.set_color ColorPair::DARK
-	NCurses.print "{"
-	NCurses.set_color ColorPair::REGULAR
-	NCurses.print "="
-	NCurses.set_color ColorPair::DARK
-	NCurses.print "}"
+	NCurses.print " "
+	NCurses.with_attribute(NCurses::Attribute::Underline) do
+		NCurses.set_color ColorPair::INFO
+		NCurses.with_attribute(NCurses::Attribute::Bold) do
+			NCurses.print "="
+		end
+		NCurses.set_color ColorPair::REGULAR
+		NCurses.with_attribute(NCurses::Attribute::Dim) do
+			NCurses.print " Clear"
+		end
+	end
 end

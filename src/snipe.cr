@@ -22,10 +22,18 @@ loop do
 	# Draw interface
 	NCurses.clear
 	NCurses.set_color ColorPair::REGULAR
-	NCurses.print "\n"
-	NCurses.print ">#{search}|\n\n"
-	NCurses.set_color ColorPair::DARK
-	NCurses.print Dir.current + "/\n"
+	NCurses.print "\n🔎 "
+	NCurses.print search
+	NCurses.with_attribute(NCurses::Attribute::Blink) do
+		NCurses.print "|\n\n"
+	end
+
+	NCurses.set_color ColorPair::ACCENTDARK
+	NCurses.with_attribute(NCurses::Attribute::Underline) do
+		NCurses.with_attribute(NCurses::Attribute::Dim) do
+			NCurses.print Dir.current + "/\n"
+		end
+	end
 
 	max_files = NCurses.max_y - 7
 
@@ -36,7 +44,6 @@ loop do
 	render_file_list(max_files, matched_files, selection)
 
 	# Move cursor to consistent position at bottom of terminal
-	NCurses.set_color ColorPair::INFO
 	NCurses.print "\n" * ([0, max_files+1 - matched_files.size].max + 1)
 
 	render_legend
