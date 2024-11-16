@@ -30,9 +30,11 @@ For example, say there is a file in the location `foo/bar/baz.txt`. This table d
 ## Why does this exist?
 This project came from a desire to explore alternative methods of programming after deciding that I wanted to move away from using VSCode.
 
-I discovered the [Micro](https://github.com/zyedidia/micro) editor, and while the editor itself was functionally appealing and seemed like a great fit for my purposes, I realized that needing to type out the full path of each code file I wanted to open was slow.
+While looking at the available options I discovered the [Micro](https://github.com/zyedidia/micro) editor, and while the editor itself was functionally appealing, I realized that needing to type out the full path of each code file I wanted to open was slow.
 
 I tried out a few existing finder programs, but wasn't able to find any that behaved the way I wanted them to. Naturally I then took the typical programmer approach of spending hours of my time creating tool that saves a few seconds.
+
+This likely won't be part of my main workflow going forwards as I will inevitably end up using Vim or Emacs or something, but writing this was fun regardless!
 
 ## Building from source
 1. Install the [Crystal](https://crystal-lang.org/) programming language
