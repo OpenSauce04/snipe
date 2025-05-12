@@ -1,6 +1,8 @@
 # Snipe
 A simple-to-use command-line file finder for Linux/Wayland
 
+![Screenshot of `snipe` being used in a terminal](https://raw.githubusercontent.com/OpenSauce04/snipe/refs/heads/master/screenshot.png)
+
 ## What is this?
 Snipe is a file finder designed to be used as part of a development environment to search for and opening files in a project's source tree.
 
