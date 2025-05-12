@@ -6,6 +6,8 @@ Snipe is a file finder designed to be used as part of a development environment 
 
 To search for a file, `cd` into a project directory and run `snipe` to open the search interface, then type in the name of the file you want to open. If necessary navigate to the file using the arrow keys, and then select the file with the enter key.
 
+Optionally, a relative path can be provided as a command line parameter (e.g. `snipe ../src`), and that path will be used as the root for searching files instead of the current directory. Currently, only paths relative to the current directory are supported, meaning absolute paths will not work.
+
 Once the file has been selected, its filename relative to the project directory is copied to the clipboard and printed to the terminal. This copied path can then be used elsewhere, such as within Emacs's `find-file`.
 
 ## How does searching work/ How does it differ from fuzzy finders?

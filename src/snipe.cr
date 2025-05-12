@@ -4,7 +4,18 @@ require "./consts.cr"
 require "./colors.cr"
 require "./interface.cr"
 
-files = Dir["**/*"].select { |f| File.file?(f) }
+path_arg = ""
+if ARGV.size > 0
+    path_arg = "/" + ARGV[0]
+end
+
+search_dir = Dir.current + path_arg + "/"
+
+files = Dir[search_dir + "**/*"].select { |f| File.file?(f) }
+files.each_with_index do |item, index| # Trim search_dir from start of paths
+    files[index] = item[search_dir.size...item.size]
+end
+
 search = ""
 matched_files = files.select(/#{Regex.escape(search)}/)
 selection = 0
@@ -30,9 +41,8 @@ loop do
 
     NCurses.set_color ColorPair::ACCENTDARK
     NCurses.with_attribute(NCurses::Attribute::Bold) do
-        NCurses.print Dir.current + "/\n"
+        NCurses.print search_dir + "\n"
     end
-
     max_files = NCurses.max_y - 7
 
     selection = [0, selection].max
