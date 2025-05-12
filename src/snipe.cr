@@ -57,13 +57,13 @@ loop do
     when NCurses::Key::Down
         selection += 1
         next
-    when 10 # TODO: Represents the Enter key; See https://github.com/SamualLB/ncurses/issues/24
+    when NCurses::Key::Enter, KEY_LF
         NCurses.end
         selected_file = matched_files[selection]
         system "wl-copy #{selected_file}"
         puts "Copied to clipboard:\n#{selected_file}"
         exit
-    when NCurses::Key::Backspace, KEY_BS # Some terminals output a BS control character when the backspace is pressed
+    when NCurses::Key::Backspace, KEY_BS
         search = search[0...-1] # Remove last character
     when '='
         search = ""
