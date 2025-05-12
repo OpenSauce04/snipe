@@ -7,7 +7,7 @@ clean:
 
 debug: clean
 	mkdir bin/
-	crystal build src/snipe.cr
+	crystal build src/snipe.cr --debug
 	mv snipe bin/
 
 help:
