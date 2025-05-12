@@ -43,7 +43,7 @@ loop do
     NCurses.with_attribute(NCurses::Attribute::Bold) do
         NCurses.print search_dir + "\n"
     end
-    max_files = NCurses.max_y - 7
+    max_files = NCurses.max_y - FILE_LIST_BOTTOM_PADDING
 
     selection = [0, selection].max
     selection = [selection, max_files-1].min
