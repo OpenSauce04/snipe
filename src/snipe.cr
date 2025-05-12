@@ -59,9 +59,10 @@ loop do
 		next
 	when 10 # TODO: Represents the Enter key; See https://github.com/SamualLB/ncurses/issues/24
 		NCurses.end
-		system "#{ENV["EDITOR"]} #{matched_files[selection]}"
-		NCurses.start
-		next
+		selected_file = matched_files[selection]
+		system "wl-copy #{selected_file}"
+		puts "Copied to clipboard:\n#{selected_file}"
+		exit
 	when NCurses::Key::Backspace, KEY_BS # Some terminals output a BS control character when the backspace is pressed
 		search = search[0...-1] # Remove last character
 	when '='
