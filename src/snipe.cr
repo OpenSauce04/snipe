@@ -83,6 +83,6 @@ loop do
     end
 
     # Update search results
-    matched_files = files.select(/#{Regex.escape(search)}[^\/]*$/)
+    matched_files = files.select(/#{Regex.escape(search)}[^\/]*$/i)
     selection = 0
 end
